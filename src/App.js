@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import SearchBar from "./components/SearchBar";
 import SortDropdownButton from "./components/SortDropdownButton";
@@ -7,42 +7,80 @@ import Form from "./components/Form";
 
 import "./components/styles/App.css";
 
-const data = [
-  { id: 1, name: "eat", status: "important" },
-  { id: 2, name: "work", status: "normal" },
-  { id: 3, name: "sleep", status: "else" }
-];
-
 function App() {
   const [isFormActive, setActiveForm] = useState(false);
   const [isAdd, setIsAdd] = useState(true);
-  const [items, setItems] = useState(data);
+  const [items, setItems] = useState([]);
   const [editId, setEditId] = useState(0);
   const [formInputName, setFormInputName] = useState("");
-  const [formSelectStatus, setformSelectStatus] = useState("");
+  const [formSelectStatus, setformSelectStatus] = useState("normal");
+  const [keyword, setKeyword] = useState("");
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  let id =
+    localStorage.getItem("id") !== "undefined"
+      ? ~~localStorage.getItem("id")
+      : 1;
+
+  async function getData() {
+    const data =
+      localStorage.getItem("items") !== "undefined"
+        ? await JSON.parse(localStorage.getItem("items"))
+        : [];
+    setItems([...data]);
+  }
+
+  function saveData(rawData) {
+    const data = JSON.stringify(rawData);
+    localStorage.setItem("items", data);
+  }
+
+  function findItem(event) {
+    const currentKeyword = event.target.value;
+    setKeyword(currentKeyword);
+    if (!currentKeyword) {
+      getData();
+    } else {
+      const findItems = items.filter(item =>
+        item.name.includes(currentKeyword)
+      );
+      setItems([...findItems]);
+    }
+  }
 
   function sortZA() {
     const newItems = items.sort((a, b) => b.name.localeCompare(a.name));
     setItems([...newItems]);
+    saveData([...newItems]);
   }
 
   function sortAZ() {
     const newItems = items.sort((a, b) => a.name.localeCompare(b.name));
     setItems([...newItems]);
+    saveData([...newItems]);
   }
 
   function saveForm() {
     if (isAdd) {
-      setItems([
+      const data = [
         ...items,
-        { id: items.length + 1, name: formInputName, status: formSelectStatus }
-      ]);
+        { id: id++, name: formInputName, status: formSelectStatus }
+      ];
+      console.log(formSelectStatus);
+      localStorage.setItem("id", id);
+      setItems(data);
+      saveData(data);
     } else {
       const item = items.find(item => item.id === editId);
       const index = items.indexOf(item);
       item.name = formInputName;
       item.status = formSelectStatus;
-      setItems([...items.slice(0, index), item, ...items.slice(index + 1)]);
+      const data = [...items.slice(0, index), item, ...items.slice(index + 1)];
+      setItems(data);
+      saveData(data);
     }
     clearForm();
   }
@@ -53,6 +91,7 @@ function App() {
     const arr = items;
     arr.splice(index, 1);
     setItems([...arr]);
+    saveData([...arr]);
   }
 
   function handleInput(event) {
@@ -65,7 +104,7 @@ function App() {
 
   function clearForm() {
     setFormInputName("");
-    setformSelectStatus("");
+    setformSelectStatus("normal");
   }
 
   function openAddForm() {
@@ -115,7 +154,7 @@ function App() {
 
             <div className="columns" style={{ marginTop: "0.5rem" }}>
               <div className="column">
-                <SearchBar />
+                <SearchBar keyword={keyword} findItem={findItem} />
               </div>
               <div className="column">
                 <SortDropdownButton sortAZ={sortAZ} sortZA={sortZA} />

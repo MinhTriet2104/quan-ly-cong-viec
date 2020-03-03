@@ -22,10 +22,10 @@ const Table = ({ items, handleDelete, handleEdit }) => {
         </tr>
       </thead>
       <tbody>
-        {items.map(item => (
+        {items.map((item, stt) => (
           <TableItem
             key={item.id}
-            id={item.id}
+            stt={stt + 1}
             name={item.name}
             status={item.status}
             handleEdit={() => handleEdit(item.id)}

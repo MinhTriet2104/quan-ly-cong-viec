@@ -26,6 +26,7 @@ const Form = ({
           type="text"
           value={name || ""}
           onChange={handleInput}
+          required
         />
         <label className="is-block" style={{ marginTop: "0.5rem" }}>
           Trạng thái:

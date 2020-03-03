@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+export default ({ keyword, findItem }) => (
   <div className="is-flex">
     <p
       className="control has-icons-left"
@@ -15,6 +15,9 @@ export default () => (
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0
         }}
+        placeholder="Nhập để tìm kiếm..."
+        value={keyword}
+        onChange={findItem}
       />
       <span className="icon is-small is-left">
         <i className="fas fa-search"></i>

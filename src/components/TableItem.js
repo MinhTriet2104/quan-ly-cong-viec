@@ -6,10 +6,10 @@ const TableColumnItem = styled.th`
   text-align: center !important;
 `;
 
-const TableItem = ({ id, name, status, handleDelete, handleEdit }) => {
+const TableItem = ({ stt, name, status, handleDelete, handleEdit }) => {
   return (
     <tr>
-      <TableColumnItem>{id}</TableColumnItem>
+      <TableColumnItem>{stt}</TableColumnItem>
       <TableColumnItem>{name}</TableColumnItem>
       <TableColumnItem>
         {(status === "important" && (
