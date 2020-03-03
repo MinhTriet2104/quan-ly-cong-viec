@@ -21,6 +21,16 @@ function App() {
   const [formInputName, setFormInputName] = useState("");
   const [formSelectStatus, setformSelectStatus] = useState("");
 
+  function sortZA() {
+    const newItems = items.sort((a, b) => b.name.localeCompare(a.name));
+    setItems([...newItems]);
+  }
+
+  function sortAZ() {
+    const newItems = items.sort((a, b) => a.name.localeCompare(b.name));
+    setItems([...newItems]);
+  }
+
   function saveForm() {
     if (isAdd) {
       setItems([
@@ -108,7 +118,7 @@ function App() {
                 <SearchBar />
               </div>
               <div className="column">
-                <SortDropdownButton />
+                <SortDropdownButton sortAZ={sortAZ} sortZA={sortZA} />
               </div>
             </div>
 

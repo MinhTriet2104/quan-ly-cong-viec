@@ -1,6 +1,15 @@
 import React from "react";
+import styled from "styled-components";
 
-export default () => (
+const ButtonOption = styled.div`
+  border: 0;
+
+  &:hover {
+    background: #ddd;
+  }
+`;
+
+export default ({ sortAZ, sortZA }) => (
   <div className="dropdown is-hoverable">
     <div className="dropdown-trigger">
       <button
@@ -16,12 +25,12 @@ export default () => (
     </div>
     <div className="dropdown-menu" id="dropdown-menu4" role="menu">
       <div className="dropdown-content">
-        <a href="/" className="dropdown-item">
+        <ButtonOption className="dropdown-item" onClick={sortAZ}>
           A - Z
-        </a>
-        <a href="/" className="dropdown-item">
+        </ButtonOption>
+        <ButtonOption className="dropdown-item" onClick={sortZA}>
           Z - A
-        </a>
+        </ButtonOption>
       </div>
     </div>
   </div>
