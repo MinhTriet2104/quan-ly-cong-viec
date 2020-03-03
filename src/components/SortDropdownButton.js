@@ -1,32 +1,25 @@
 import React from "react";
 
 export default () => (
-  <div class="dropdown is-hoverable">
-    <div class="dropdown-trigger">
+  <div className="dropdown is-hoverable">
+    <div className="dropdown-trigger">
       <button
-        class="button"
+        className="button"
         aria-haspopup="true"
         aria-controls="dropdown-menu4"
       >
         <span>Sắp xếp</span>
-        <span class="icon is-small">
-          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        <span className="icon is-small">
+          <i className="fas fa-angle-down" aria-hidden="true"></i>
         </span>
       </button>
     </div>
-    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-      <div class="dropdown-content">
-        <a href="/" class="dropdown-item">
+    <div className="dropdown-menu" id="dropdown-menu4" role="menu">
+      <div className="dropdown-content">
+        <a href="/" className="dropdown-item">
           A - Z
         </a>
-        <a href="/" class="dropdown-item">
-          Z - A
-        </a>
-        <hr class="dropdown-divider" />
-        <a href="/" class="dropdown-item">
-          A - Z
-        </a>
-        <a href="/" class="dropdown-item">
+        <a href="/" className="dropdown-item">
           Z - A
         </a>
       </div>

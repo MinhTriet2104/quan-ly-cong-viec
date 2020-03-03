@@ -1,10 +1,18 @@
 import React from "react";
 
-const Form = ({ closeForm }) => {
+const Form = ({
+  isAdd,
+  name,
+  status,
+  handleInput,
+  handleSelect,
+  saveForm,
+  closeForm
+}) => {
   return (
     <div className="message is-warning">
       <div className="message-header">
-        <p>Thêm Công Việc</p>
+        <p>{isAdd ? "Thêm Công Việc" : "Sửa Công Việc"}</p>
         <button
           className="delete"
           aria-label="delete"
@@ -13,23 +21,38 @@ const Form = ({ closeForm }) => {
       </div>
       <div className="message-body">
         <label className="is-block">Tên: </label>
-        <input className="input" type="text" />
+        <input
+          className="input"
+          type="text"
+          value={name || ""}
+          onChange={handleInput}
+        />
         <label className="is-block" style={{ marginTop: "0.5rem" }}>
           Trạng thái:
         </label>
-        <input className="input" type="text" />
+        <div className="select" style={{ marginTop: "0.2rem", width: "100%" }}>
+          <select
+            style={{ width: "100%" }}
+            value={status || "normal"}
+            onChange={handleSelect}
+          >
+            <option value="normal">Bình Thường</option>
+            <option value="important">Quan Trọng</option>
+            <option value="else">Kém Quan Trọng</option>
+          </select>
+        </div>
         <div className="buttons" style={{ marginTop: "1rem" }}>
-          <button class="button is-success">
-            <span class="icon is-small">
-              <i class="fas fa-check"></i>
+          <button className="button is-success" onClick={saveForm}>
+            <span className="icon is-small">
+              <i className="fas fa-check"></i>
             </span>
             <span>Lưu lại</span>
           </button>
-          <button class="button is-danger is-outlined" onClick={closeForm}>
-            <span>Hủy bỏ</span>
-            <span class="icon is-small">
-              <i class="fas fa-times"></i>
+          <button className="button is-danger is-outlined" onClick={closeForm}>
+            <span className="icon is-small">
+              <i className="fas fa-times"></i>
             </span>
+            <span>Hủy bỏ</span>
           </button>
         </div>
       </div>

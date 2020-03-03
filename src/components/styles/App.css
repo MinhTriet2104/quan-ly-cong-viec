@@ -9,3 +9,7 @@
 .w0 {
   width: 0% !important;
 }
+
+.verital-middle {
+  vertical-align: middle;
+}

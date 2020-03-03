@@ -3,25 +3,25 @@ import React from "react";
 export default () => (
   <div className="is-flex">
     <p
-      class="control has-icons-left"
+      className="control has-icons-left"
       style={{
         width: "100%"
       }}
     >
       <input
-        class="input"
+        className="input"
         type="text"
         style={{
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0
         }}
       />
-      <span class="icon is-small is-left">
-        <i class="fas fa-search"></i>
+      <span className="icon is-small is-left">
+        <i className="fas fa-search"></i>
       </span>
     </p>
     <button
-      class="button is-primary"
+      className="button is-primary"
       style={{
         borderTopLeftRadius: 0,
         borderBottomLeftRadius: 0
