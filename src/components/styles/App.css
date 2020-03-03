@@ -1,0 +1,11 @@
+.App {
+  height: 100vh;
+}
+
+.message {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.w0 {
+  width: 0% !important;
+}
