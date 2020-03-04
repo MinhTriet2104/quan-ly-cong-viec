@@ -2,7 +2,14 @@ import React from "react";
 
 import TableItem from "../TableItem";
 
-const Table = ({ items, handleDelete, handleEdit }) => {
+const Table = ({ items, filter, handleDelete, handleEdit }) => {
+  let renderItems;
+  if (filter === "all") {
+    renderItems = items;
+  } else {
+    renderItems = items.filter(item => item.status === filter);
+  }
+
   return (
     <table className="table is-bordered" style={{ width: "100%" }}>
       <thead>
@@ -22,7 +29,7 @@ const Table = ({ items, handleDelete, handleEdit }) => {
         </tr>
       </thead>
       <tbody>
-        {items.map((item, stt) => (
+        {renderItems.map((item, stt) => (
           <TableItem
             key={item.id}
             stt={stt + 1}

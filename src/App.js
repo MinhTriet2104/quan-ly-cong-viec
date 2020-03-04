@@ -4,8 +4,11 @@ import SearchBar from "./components/SearchBar";
 import SortDropdownButton from "./components/SortDropdownButton";
 import Table from "./components/container/Table";
 import Form from "./components/Form";
+import FilterButton from "./components/FilterButton";
 
 import "./components/styles/App.css";
+
+import TodoListImg from "./img/to-do-list.svg";
 
 function App() {
   const [isFormActive, setActiveForm] = useState(false);
@@ -15,6 +18,7 @@ function App() {
   const [formInputName, setFormInputName] = useState("");
   const [formSelectStatus, setformSelectStatus] = useState("normal");
   const [keyword, setKeyword] = useState("");
+  const [filterOption, setFilterOption] = useState("all");
 
   useEffect(() => {
     getData();
@@ -124,9 +128,24 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1 className="has-text-centered is-size-3 has-text-weight-semibold is-marginless">
-          Quản Lý Công Việc
-        </h1>
+        <div
+          className="has-text-centered"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "2em"
+          }}
+        >
+          <h1 className="is-size-3 has-text-weight-semibold is-marginless">
+            Quản Lý Công Việc
+          </h1>
+          <img
+            src={TodoListImg}
+            alt="Todo List React"
+            width="40px"
+            style={{ marginLeft: "0.2em" }}
+          />
+        </div>
         <hr />
         <div className="columns">
           <div
@@ -157,12 +176,17 @@ function App() {
                 <SearchBar keyword={keyword} findItem={findItem} />
               </div>
               <div className="column">
-                <SortDropdownButton sortAZ={sortAZ} sortZA={sortZA} />
+                <SortDropdownButton sortAZ={sortAZ} sortZA={sortZA} />{" "}
+                <FilterButton
+                  filterOption={filterOption}
+                  filterSelect={event => setFilterOption(event.target.value)}
+                />
               </div>
             </div>
 
             <Table
               items={items}
+              filter={filterOption}
               handleEdit={openEditForm}
               handleDelete={deleteItem}
             />
