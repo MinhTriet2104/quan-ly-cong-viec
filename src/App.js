@@ -25,13 +25,15 @@ function App() {
   }, []);
 
   let id =
-    localStorage.getItem("id") !== "undefined"
+    localStorage.getItem("id") !== "undefined" &&
+    localStorage.getItem("id") !== null
       ? ~~localStorage.getItem("id")
       : 1;
 
   async function getData() {
     const data =
-      localStorage.getItem("items") !== "undefined"
+      localStorage.getItem("items") !== "undefined" &&
+      localStorage.getItem("items") !== null
         ? await JSON.parse(localStorage.getItem("items"))
         : [];
     setItems([...data]);
