@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import TableItem from "../TableItem";
 
-const Table = ({ items, filter, handleDelete, handleEdit }) => {
+const Table = ({ filter, handleDelete, handleEdit }) => {
+  const items = useSelector(state => state.tasks);
   let renderItems;
   if (filter === "all") {
     renderItems = items;

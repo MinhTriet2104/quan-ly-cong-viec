@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
-const Form = ({
-  isAdd,
-  name,
-  status,
-  handleInput,
-  handleSelect,
-  saveForm,
-  closeForm
-}) => {
+import * as actions from "../actions/index";
+
+const Form = ({ isAdd, closeForm }) => {
+  const [formInputName, setFormInputName] = useState("");
+  const [formSelectStatus, setformSelectStatus] = useState("normal");
+
+  const dispatch = useDispatch();
+
+  function handleInput(event) {
+    setFormInputName(event.target.value);
+  }
+
+  function handleSelect(event) {
+    setformSelectStatus(event.target.value);
+  }
+
+  function clearForm() {
+    setFormInputName("");
+    setformSelectStatus("normal");
+  }
+
+  function addItem() {
+    dispatch(
+      actions.addItem({
+        name: formInputName,
+        status: formSelectStatus
+      })
+    );
+    clearForm();
+  }
+
   return (
     <div className="message is-warning">
       <div className="message-header">
@@ -24,7 +47,7 @@ const Form = ({
         <input
           className="input"
           type="text"
-          value={name || ""}
+          value={formInputName}
           onChange={handleInput}
           required
         />
@@ -34,7 +57,7 @@ const Form = ({
         <div className="select" style={{ marginTop: "0.2rem", width: "100%" }}>
           <select
             style={{ width: "100%" }}
-            value={status || "normal"}
+            value={formSelectStatus}
             onChange={handleSelect}
           >
             <option value="normal">Bình Thường</option>
@@ -43,7 +66,7 @@ const Form = ({
           </select>
         </div>
         <div className="buttons" style={{ marginTop: "1rem" }}>
-          <button className="button is-success" onClick={saveForm}>
+          <button className="button is-success" onClick={addItem}>
             <span className="icon is-small">
               <i className="fas fa-check"></i>
             </span>

@@ -75,7 +75,6 @@ function App() {
         ...items,
         { id: id++, name: formInputName, status: formSelectStatus }
       ];
-      console.log(formSelectStatus);
       localStorage.setItem("id", id);
       setItems(data);
       saveData(data);
@@ -98,14 +97,6 @@ function App() {
     arr.splice(index, 1);
     setItems([...arr]);
     saveData([...arr]);
-  }
-
-  function handleInput(event) {
-    setFormInputName(event.target.value);
-  }
-
-  function handleSelect(event) {
-    setformSelectStatus(event.target.value);
   }
 
   function clearForm() {
@@ -157,12 +148,8 @@ function App() {
           >
             <Form
               isAdd={isAdd}
-              name={formInputName}
-              status={formSelectStatus}
               closeForm={() => setActiveForm(false)}
               saveForm={saveForm}
-              handleInput={handleInput}
-              handleSelect={handleSelect}
             />
           </div>
           <div className={isFormActive ? "column is-8" : "column is-12"}>
@@ -187,7 +174,6 @@ function App() {
             </div>
 
             <Table
-              items={items}
               filter={filterOption}
               handleEdit={openEditForm}
               handleDelete={deleteItem}
