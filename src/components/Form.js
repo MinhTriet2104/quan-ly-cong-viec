@@ -1,32 +1,33 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../actions/index";
 
-const Form = ({ isAdd, closeForm }) => {
-  const [formInputName, setFormInputName] = useState("");
-  const [formSelectStatus, setformSelectStatus] = useState("normal");
-
+const Form = () => {
+  const form = useSelector(state => state.form);
   const dispatch = useDispatch();
 
   function handleInput(event) {
-    setFormInputName(event.target.value);
+    dispatch(actions.handleInput(event.target.value));
   }
 
   function handleSelect(event) {
-    setformSelectStatus(event.target.value);
+    dispatch(actions.handleSelect(event.target.value));
   }
 
   function clearForm() {
-    setFormInputName("");
-    setformSelectStatus("normal");
+    dispatch(actions.clearForm());
+  }
+
+  function closeForm() {
+    dispatch(actions.closeForm());
+    clearForm();
   }
 
   function addItem() {
     dispatch(
       actions.addItem({
-        name: formInputName,
-        status: formSelectStatus
+        name: form.inputName,
+        status: form.selectStatus
       })
     );
     clearForm();
@@ -35,7 +36,7 @@ const Form = ({ isAdd, closeForm }) => {
   return (
     <div className="message is-warning">
       <div className="message-header">
-        <p>{isAdd ? "Thêm Công Việc" : "Sửa Công Việc"}</p>
+        <p>{form.isAdd ? "Thêm Công Việc" : "Sửa Công Việc"}</p>
         <button
           className="delete"
           aria-label="delete"
@@ -47,7 +48,7 @@ const Form = ({ isAdd, closeForm }) => {
         <input
           className="input"
           type="text"
-          value={formInputName}
+          value={form.inputName}
           onChange={handleInput}
           required
         />
@@ -57,7 +58,7 @@ const Form = ({ isAdd, closeForm }) => {
         <div className="select" style={{ marginTop: "0.2rem", width: "100%" }}>
           <select
             style={{ width: "100%" }}
-            value={formSelectStatus}
+            value={form.selectStatus}
             onChange={handleSelect}
           >
             <option value="normal">Bình Thường</option>

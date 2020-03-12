@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "./actions/index";
 
 import SearchBar from "./components/SearchBar";
 import SortDropdownButton from "./components/SortDropdownButton";
@@ -11,6 +13,9 @@ import "./components/styles/App.css";
 import TodoListImg from "./img/to-do-list.svg";
 
 function App() {
+  const form = useSelector(state => state.form);
+  const dispatch = useDispatch();
+
   const [isFormActive, setActiveForm] = useState(false);
   const [isAdd, setIsAdd] = useState(true);
   const [items, setItems] = useState([]);
@@ -69,27 +74,6 @@ function App() {
     saveData([...newItems]);
   }
 
-  function saveForm() {
-    if (isAdd) {
-      const data = [
-        ...items,
-        { id: id++, name: formInputName, status: formSelectStatus }
-      ];
-      localStorage.setItem("id", id);
-      setItems(data);
-      saveData(data);
-    } else {
-      const item = items.find(item => item.id === editId);
-      const index = items.indexOf(item);
-      item.name = formInputName;
-      item.status = formSelectStatus;
-      const data = [...items.slice(0, index), item, ...items.slice(index + 1)];
-      setItems(data);
-      saveData(data);
-    }
-    clearForm();
-  }
-
   function deleteItem(id) {
     const item = items.find(item => item.id === id);
     const index = items.indexOf(item);
@@ -99,15 +83,8 @@ function App() {
     saveData([...arr]);
   }
 
-  function clearForm() {
-    setFormInputName("");
-    setformSelectStatus("normal");
-  }
-
   function openAddForm() {
-    setActiveForm(true);
-    setIsAdd(true);
-    clearForm();
+    dispatch(actions.openAddForm());
   }
 
   function openEditForm(id) {
@@ -143,16 +120,12 @@ function App() {
         <div className="columns">
           <div
             className={
-              "column is-4 " + (!isFormActive && "w0 is-paddingless is-hidden")
+              "column is-4 " + (!form.isOpen && "w0 is-paddingless is-hidden")
             }
           >
-            <Form
-              isAdd={isAdd}
-              closeForm={() => setActiveForm(false)}
-              saveForm={saveForm}
-            />
+            <Form />
           </div>
-          <div className={isFormActive ? "column is-8" : "column is-12"}>
+          <div className={form.isOpen ? "column is-8" : "column is-12"}>
             <button className="button is-primary" onClick={openAddForm}>
               <span className="icon is-small">
                 <i className="fas fa-plus"></i>
