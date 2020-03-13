@@ -23,13 +23,23 @@ const Form = () => {
     clearForm();
   }
 
-  function addItem() {
-    dispatch(
-      actions.addItem({
-        name: form.inputName,
-        status: form.selectStatus
-      })
-    );
+  function saveItem() {
+    if (form.isAdd) {
+      dispatch(
+        actions.addItem({
+          name: form.inputName,
+          status: form.selectStatus
+        })
+      );
+    } else {
+      dispatch(
+        actions.editItem({
+          id: form.editId,
+          name: form.inputName,
+          status: form.selectStatus
+        })
+      );
+    }
     clearForm();
   }
 
@@ -67,7 +77,7 @@ const Form = () => {
           </select>
         </div>
         <div className="buttons" style={{ marginTop: "1rem" }}>
-          <button className="button is-success" onClick={addItem}>
+          <button className="button is-success" onClick={saveItem}>
             <span className="icon is-small">
               <i className="fas fa-check"></i>
             </span>

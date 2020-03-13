@@ -32,7 +32,7 @@ const Table = ({ filter }) => {
       </thead>
       <tbody>
         {renderItems.map((item, stt) => (
-          <TableItem key={item.id} stt={stt + 1} item={item} />
+          <TableItem key={stt} stt={stt + 1} item={item} />
         ))}
       </tbody>
     </table>

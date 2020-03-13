@@ -3,6 +3,7 @@ import * as types from "../constants/ActionTypes";
 const initialState = {
   inputName: "",
   selectStatus: "normal",
+  editId: -1,
   isOpen: false,
   isAdd: true
 };
@@ -32,10 +33,11 @@ const form = (state = initialState, action) => {
         isOpen: true
       };
     case types.OPEN_EDIT_FORM:
-      const { name, status } = action.item;
+      const { id, name, status } = action.item;
       return {
         inputName: name,
         selectStatus: status,
+        editId: id,
         isAdd: false,
         isOpen: true
       };

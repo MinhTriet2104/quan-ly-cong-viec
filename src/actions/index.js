@@ -14,9 +14,9 @@ export const deleteItem = id => ({
   id
 });
 
-export const editItem = id => ({
+export const editItem = item => ({
   type: types.EDIT_ITEM,
-  id
+  item
 });
 
 export const handleInput = value => ({

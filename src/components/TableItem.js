@@ -16,7 +16,7 @@ const TableItem = ({ stt, item }) => {
     dispatch(actions.openEditForm(item));
   }
 
-  function handleDelete() {
+  function handleDelete(id) {
     dispatch(actions.deleteItem(id));
   }
 
