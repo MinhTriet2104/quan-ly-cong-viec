@@ -19,6 +19,14 @@ export const editItem = item => ({
   item
 });
 
+export const sortAZ = () => ({
+  type: types.SORT_A_TO_Z
+});
+
+export const sortZA = () => ({
+  type: types.SORT_Z_TO_A
+});
+
 export const handleInput = value => ({
   type: types.HANDLE_INPUT,
   value

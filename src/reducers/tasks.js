@@ -24,14 +24,15 @@ const tasks = (state = initialState, action) => {
     case types.ADD_ITEM: {
       const { name, status } = action.item;
       const newState = [
-        ...state,
         {
           id: id++,
           name: name,
           status: status
-        }
+        },
+        ...state
       ];
       saveData(newState);
+      localStorage.setItem("id", id);
       return newState;
     }
     case types.DELETE_ITEM: {
@@ -50,6 +51,16 @@ const tasks = (state = initialState, action) => {
         { id: id, name: name, status: status },
         ...state.slice(index + 1)
       ];
+      saveData(newState);
+      return newState;
+    }
+    case types.SORT_A_TO_Z: {
+      const newState = [...state.sort((a, b) => a.name.localeCompare(b.name))];
+      saveData(newState);
+      return newState;
+    }
+    case types.SORT_Z_TO_A: {
+      const newState = [...state.sort((a, b) => b.name.localeCompare(a.name))];
       saveData(newState);
       return newState;
     }

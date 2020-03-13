@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "./actions/index";
 
@@ -16,24 +16,9 @@ function App() {
   const form = useSelector(state => state.form);
   const dispatch = useDispatch();
 
-  const [isFormActive, setActiveForm] = useState(false);
-  const [isAdd, setIsAdd] = useState(true);
   const [items, setItems] = useState([]);
-  const [editId, setEditId] = useState(0);
-  const [formInputName, setFormInputName] = useState("");
-  const [formSelectStatus, setformSelectStatus] = useState("normal");
   const [keyword, setKeyword] = useState("");
   const [filterOption, setFilterOption] = useState("all");
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  let id =
-    localStorage.getItem("id") !== "undefined" &&
-    localStorage.getItem("id") !== null
-      ? ~~localStorage.getItem("id")
-      : 1;
 
   async function getData() {
     const data =
@@ -42,11 +27,6 @@ function App() {
         ? await JSON.parse(localStorage.getItem("items"))
         : [];
     setItems([...data]);
-  }
-
-  function saveData(rawData) {
-    const data = JSON.stringify(rawData);
-    localStorage.setItem("items", data);
   }
 
   function findItem(event) {
@@ -62,37 +42,8 @@ function App() {
     }
   }
 
-  function sortZA() {
-    const newItems = items.sort((a, b) => b.name.localeCompare(a.name));
-    setItems([...newItems]);
-    saveData([...newItems]);
-  }
-
-  function sortAZ() {
-    const newItems = items.sort((a, b) => a.name.localeCompare(b.name));
-    setItems([...newItems]);
-    saveData([...newItems]);
-  }
-
-  function deleteItem(id) {
-    const item = items.find(item => item.id === id);
-    const index = items.indexOf(item);
-    const arr = items;
-    arr.splice(index, 1);
-    setItems([...arr]);
-    saveData([...arr]);
-  }
-
   function openAddForm() {
     dispatch(actions.openAddForm());
-  }
-
-  function openEditForm(id) {
-    setActiveForm(true);
-    setIsAdd(false);
-    setEditId(id);
-    setFormInputName(items.find(item => item.id === id).name);
-    setformSelectStatus(items.find(item => item.id === id).status);
   }
 
   return (
@@ -138,7 +89,7 @@ function App() {
                 <SearchBar keyword={keyword} findItem={findItem} />
               </div>
               <div className="column">
-                <SortDropdownButton sortAZ={sortAZ} sortZA={sortZA} />{" "}
+                <SortDropdownButton />{" "}
                 <FilterButton
                   filterOption={filterOption}
                   filterSelect={event => setFilterOption(event.target.value)}
