@@ -19,11 +19,13 @@ function saveData(rawData) {
   localStorage.setItem("items", data);
 }
 
+let newState = [];
+
 const tasks = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_ITEM:
       const { name, status } = action.item;
-      const newState = [
+      newState = [
         ...state,
         {
           id: id++,
@@ -31,6 +33,12 @@ const tasks = (state = initialState, action) => {
           status: status
         }
       ];
+      saveData(newState);
+      return newState;
+    case types.DELETE_ITEM:
+      const findItem = state.find(item => item.id === action.id);
+      const index = state.indexOf(findItem);
+      newState = [...state.slice(0, index), ...state.slice(index + 1)];
       saveData(newState);
       return newState;
     case types.GET_ITEMS:

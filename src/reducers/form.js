@@ -32,8 +32,10 @@ const form = (state = initialState, action) => {
         isOpen: true
       };
     case types.OPEN_EDIT_FORM:
+      const { name, status } = action.item;
       return {
-        ...state,
+        inputName: name,
+        selectStatus: status,
         isAdd: false,
         isOpen: true
       };

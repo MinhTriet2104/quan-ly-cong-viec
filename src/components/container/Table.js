@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import TableItem from "../TableItem";
 
-const Table = ({ filter, handleDelete, handleEdit }) => {
+const Table = ({ filter }) => {
   const items = useSelector(state => state.tasks);
   let renderItems;
   if (filter === "all") {
@@ -32,14 +32,7 @@ const Table = ({ filter, handleDelete, handleEdit }) => {
       </thead>
       <tbody>
         {renderItems.map((item, stt) => (
-          <TableItem
-            key={item.id}
-            stt={stt + 1}
-            name={item.name}
-            status={item.status}
-            handleEdit={() => handleEdit(item.id)}
-            handleDelete={() => handleDelete(item.id)}
-          />
+          <TableItem key={item.id} stt={stt + 1} item={item} />
         ))}
       </tbody>
     </table>

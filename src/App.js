@@ -146,11 +146,7 @@ function App() {
               </div>
             </div>
 
-            <Table
-              filter={filterOption}
-              handleEdit={openEditForm}
-              handleDelete={deleteItem}
-            />
+            <Table filter={filterOption} />
           </div>
         </div>
       </div>

@@ -9,6 +9,16 @@ export const addItem = item => ({
   item
 });
 
+export const deleteItem = id => ({
+  type: types.DELETE_ITEM,
+  id
+});
+
+export const editItem = id => ({
+  type: types.EDIT_ITEM,
+  id
+});
+
 export const handleInput = value => ({
   type: types.HANDLE_INPUT,
   value

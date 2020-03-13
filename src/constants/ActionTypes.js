@@ -1,5 +1,7 @@
 export const GET_ITEMS = "GET_ITEMS";
 export const ADD_ITEM = "ADD_ITEMS";
+export const DELETE_ITEM = "DELETE_ITEMS";
+export const EDIT_ITEM = "EDIT_ITEMS";
 export const HANDLE_INPUT = "HANDLE_INPUT";
 export const HANDLE_SELECT = "HANDLE_SELECT";
 export const CLEAR_FORM = "CLEAR_FORM";
