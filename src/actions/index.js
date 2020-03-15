@@ -37,6 +37,11 @@ export const handleSelect = value => ({
   value
 });
 
+export const handleKeyword = value => ({
+  type: types.HANDLE_KEYWORD,
+  value
+});
+
 export const clearForm = () => ({
   type: types.CLEAR_FORM
 });
@@ -52,4 +57,9 @@ export const openEditForm = item => ({
 
 export const closeForm = () => ({
   type: types.CLOSE_FORM
+});
+
+export const filterWithKeyWord = keyword => ({
+  type: types.FILTER_WITH_KEYWORD,
+  keyword
 });

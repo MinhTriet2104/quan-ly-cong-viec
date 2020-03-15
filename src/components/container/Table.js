@@ -5,6 +5,7 @@ import TableItem from "../TableItem";
 
 const Table = ({ filter }) => {
   const items = useSelector(state => state.tasks);
+  const render = useSelector(state => state.filter);
   let renderItems;
   if (filter === "all") {
     renderItems = items;
