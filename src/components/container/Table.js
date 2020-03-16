@@ -3,14 +3,18 @@ import { useSelector } from "react-redux";
 
 import TableItem from "../TableItem";
 
-const Table = ({ filter }) => {
+const Table = () => {
   const items = useSelector(state => state.tasks);
-  const render = useSelector(state => state.filter);
+  const { status, keyword } = useSelector(state => state.filter);
+
   let renderItems;
-  if (filter === "all") {
+  if (status === "all") {
     renderItems = items;
   } else {
-    renderItems = items.filter(item => item.status === filter);
+    renderItems = items.filter(item => item.status === status);
+  }
+  if (keyword !== "") {
+    renderItems = renderItems.filter(item => item.name.includes(keyword));
   }
 
   return (

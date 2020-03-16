@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "./actions/index";
 
@@ -15,32 +15,6 @@ import TodoListImg from "./img/to-do-list.svg";
 function App() {
   const form = useSelector(state => state.form);
   const dispatch = useDispatch();
-
-  const [items, setItems] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  const [filterOption, setFilterOption] = useState("all");
-
-  async function getData() {
-    const data =
-      localStorage.getItem("items") !== "undefined" &&
-      localStorage.getItem("items") !== null
-        ? await JSON.parse(localStorage.getItem("items"))
-        : [];
-    setItems([...data]);
-  }
-
-  function findItem(event) {
-    const currentKeyword = event.target.value;
-    setKeyword(currentKeyword);
-    if (!currentKeyword) {
-      getData();
-    } else {
-      const findItems = items.filter(item =>
-        item.name.includes(currentKeyword)
-      );
-      setItems([...findItems]);
-    }
-  }
 
   function openAddForm() {
     dispatch(actions.openAddForm());
@@ -86,18 +60,16 @@ function App() {
 
             <div className="columns" style={{ marginTop: "0.5rem" }}>
               <div className="column">
-                <SearchBar keyword={keyword} findItem={findItem} />
+                <SearchBar />
               </div>
               <div className="column">
-                <SortDropdownButton />{" "}
-                <FilterButton
-                  filterOption={filterOption}
-                  filterSelect={event => setFilterOption(event.target.value)}
-                />
+                <SortDropdownButton />
+                {"  "}
+                <FilterButton />
               </div>
             </div>
 
-            <Table filter={filterOption} />
+            <Table />
           </div>
         </div>
       </div>

@@ -10,5 +10,5 @@ export const CLEAR_FORM = "CLEAR_FORM";
 export const OPEN_ADD_FORM = "OPEN_ADD_FORM";
 export const OPEN_EDIT_FORM = "OPEN_EDIT_FORM";
 export const CLOSE_FORM = "CLOSE_FORM";
-export const HANDLE_KEYWORD = "HANDLE_KEYWORD";
-export const FILTER_WITH_KEYWORD = "FILTER_WITH_KEYWORD";
+export const CHANGE_KEYWORD = "CHANGE_KEYWORD";
+export const CHANGE_STATUS = "CHANGE_STATUS";

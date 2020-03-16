@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { handleKeyword } from "../actions/index";
+import { changeKeyWord } from "../actions/index";
 
 export default () => {
-  const keyword = useSelector(state => state.searchBar);
+  const { keyword } = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
-  function findItem(event) {
-    dispatch(handleKeyword(event.target.value));
+  function handleInput(event) {
+    dispatch(changeKeyWord(event.target.value));
   }
 
   return (
@@ -27,7 +27,7 @@ export default () => {
           }}
           placeholder="Nhập để tìm kiếm..."
           value={keyword}
-          onChange={findItem}
+          onChange={handleInput}
         />
         <span className="icon is-small is-left">
           <i className="fas fa-search"></i>
