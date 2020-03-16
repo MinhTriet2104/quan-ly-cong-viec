@@ -12,3 +12,4 @@ export const OPEN_EDIT_FORM = "OPEN_EDIT_FORM";
 export const CLOSE_FORM = "CLOSE_FORM";
 export const CHANGE_KEYWORD = "CHANGE_KEYWORD";
 export const CHANGE_STATUS = "CHANGE_STATUS";
+export const SWITCH_STATUS = "SWITCH_STATUS";

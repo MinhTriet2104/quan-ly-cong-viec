@@ -13,3 +13,7 @@
 .verital-middle {
   vertical-align: middle;
 }
+
+.tag {
+  cursor: pointer;
+}

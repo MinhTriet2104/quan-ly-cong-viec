@@ -20,17 +20,29 @@ const TableItem = ({ stt, item }) => {
     dispatch(actions.deleteItem(id));
   }
 
+  function switchStatus(item) {
+    dispatch(actions.switchStatus(item));
+  }
+
   return (
     <tr>
       <TableColumnItem>{stt}</TableColumnItem>
       <TableColumnItem>{name}</TableColumnItem>
       <TableColumnItem>
         {(status === "important" && (
-          <span className="tag is-danger">Quan Trọng</span>
+          <span className="tag is-danger" onClick={() => switchStatus(item)}>
+            Quan Trọng
+          </span>
         )) ||
           (status === "normal" && (
-            <span className="tag is-primary">Bình Thường</span>
-          )) || <span className="tag is-info">Kém Quan Trọng</span>}
+            <span className="tag is-primary" onClick={() => switchStatus(item)}>
+              Bình Thường
+            </span>
+          )) || (
+            <span className="tag is-info" onClick={() => switchStatus(item)}>
+              Kém Quan Trọng
+            </span>
+          )}
       </TableColumnItem>
       <TableColumnItem>
         <button className="button is-link" onClick={() => handleEdit(item)}>

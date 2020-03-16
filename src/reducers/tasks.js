@@ -64,6 +64,24 @@ const tasks = (state = initialState, action) => {
       saveData(newState);
       return newState;
     }
+    case types.SWITCH_STATUS: {
+      const { id, name, status } = action.item;
+      const findItem = state.find(item => item.id === id);
+      const index = state.indexOf(findItem);
+      const newStatus =
+        status === "normal"
+          ? "important"
+          : status === "else"
+          ? "normal"
+          : "else";
+      const newState = [
+        ...state.slice(0, index),
+        { id: id, name: name, status: newStatus },
+        ...state.slice(index + 1)
+      ];
+      saveData(newState);
+      return newState;
+    }
     case types.GET_ITEMS:
     default:
       return state;

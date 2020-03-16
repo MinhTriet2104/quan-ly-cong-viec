@@ -63,3 +63,8 @@ export const changeStatus = status => ({
   type: types.CHANGE_STATUS,
   status
 });
+
+export const switchStatus = item => ({
+  type: types.SWITCH_STATUS,
+  item
+});
