@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import TableItem from "../TableItem";
+import TableItem from "../components/TableItem";
 
-const Table = () => {
+const TableContainer = () => {
   const items = useSelector(state => state.tasks);
   const { status, keyword } = useSelector(state => state.filter);
 
@@ -44,4 +44,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default TableContainer;

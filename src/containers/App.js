@@ -1,16 +1,16 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import * as actions from "./actions/index";
+import * as actions from "../actions/index";
 
-import SearchBar from "./components/SearchBar";
-import SortDropdownButton from "./components/SortDropdownButton";
-import Table from "./components/container/Table";
-import Form from "./components/Form";
-import FilterButton from "./components/FilterButton";
+import SearchBar from "../components/SearchBar";
+import SortDropdownButton from "../components/SortDropdownButton";
+import TableContainer from "./TableContainer";
+import Form from "../components/Form";
+import FilterButton from "../components/FilterButton";
 
-import "./components/styles/App.css";
+import "../styles/App.css";
 
-import TodoListImg from "./img/to-do-list.svg";
+import TodoListImg from "../img/to-do-list.svg";
 
 function App() {
   const form = useSelector(state => state.form);
@@ -69,7 +69,7 @@ function App() {
               </div>
             </div>
 
-            <Table />
+            <TableContainer />
           </div>
         </div>
       </div>
